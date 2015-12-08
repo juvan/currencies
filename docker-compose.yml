@@ -1,0 +1,16 @@
+currencies:
+  build: ./currencies-service
+  ports:
+    - "3000"
+  links:
+    - redis
+redis:
+  image: redis
+  ports: ["6379"]
+
+haproxy:
+  image: tutum/haproxy
+  links:
+    - currencies
+  ports:
+    - "80:80"
